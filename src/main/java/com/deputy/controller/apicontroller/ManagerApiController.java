@@ -63,6 +63,11 @@ public class ManagerApiController {
 	/**
 	 * @description 관리자급 이상의 권한이 선택된 유저의 업무시작 종료 정보를 수정 처리 페이지
 	 * @param id 선택된 아이디값
+	 * @param idList 수정된 값들의 workHistory id값들
+	 * @param startDate 시작일 수정된 값들
+	 * @param finishDate 종료일 수정된 값들
+	 * @param startAts 시작시간 수정된 값들
+	 * @param finishAts 종료시간 수정된 값들
 	 * @return service가 올부르게 작동시 지정된 uri 페이지로 이동
 	 */
 	@PostMapping("/manager/work-update/{id}")
