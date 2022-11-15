@@ -1,0 +1,69 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/signin.css}" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="_csrf" th:content="${_csrf.token}">
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+</head>
+
+<body class="text-center">
+	<input type="hidden" th:value="${employee.id}" id="id">
+	<header th:insert="@{/fragments/commonHead.html}"></header>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<form method="POST" th:action="@{/deputy/manager/work-update/{id}(id=${employee.id})}">
+		<div class="container">
+			<div class="table-responsive">
+				<br> <br>
+				<h2>사원정보 수정</h2>
+				<br>
+				<table class="table table-sm table-hover">
+					<thead>
+						<tr>
+							<th class="col-15">시작일자</th>
+							<th>일자수정</th>
+							<th>시작시간</th>
+							<th>시간수정</th>
+							<th>종료일자</th>
+							<th>일자수정</th>
+							<th>종료시간</th>
+							<th>시간수정</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="history : ${history}">
+							<td th:text="|${history.startDate.Month+1}월 ${history.startDate.Date}일|">1</td>
+							<td><input type="date" name="startDate"></td>
+							<td
+								th:text="|${history.startAt.hours}시 ${history.startAt.minutes}분|">1</td>
+							<td><input type="time" name="startAts"></td>
+							<td th:if="${history.finishDate} != null" th:text="|${history.finishDate.Month+1}월 ${history.finishDate.Date}일|">1</td>
+							<td th:unless="${history.finishDate} !=null"></td>
+							<td th:if="${history.finishDate} != null"><input type="date" name="finishDate"></td>
+							<td th:unless="${history.finishDate} !=null"></td>
+							<td th:if="${history.finishAt} != null" th:text="|${history.finishAt.hours}시 ${history.finishAt.minutes}분|">1</td>
+							<td th:unless="${history.finishDate} !=null"></td>
+							<td th:if="${history.finishAt} != null"><input type="time" name="finishAts"></td>
+							<td th:unless="${history.finishDate} !=null"></td>
+							<td><input type="hidden" name="idList" th:value="${history.id}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+			<input type="submit" id="btn-work-update" class="w-7 btn btn-lg btn-primary">
+	</form>
+	<script src="/js/managerajax.js"></script>
+
+	<!-- Optional JavaScript; choose one of the two! -->
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+</body>
+</html>

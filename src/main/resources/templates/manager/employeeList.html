@@ -1,0 +1,79 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<link th:href="@{/css/signin.css}" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="text-center">
+	<header th:insert="@{/fragments/commonHead.html}"></header>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<br>
+	<div class="container">
+		<br> <br>
+		<h2>사원목록</h2>
+		<br>
+		<div class="container col-5">
+			<form sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')"
+				method="get" th:action="@{/deputy/manager/employeelist}">
+				<div class="d-flex">
+				<input type="search" class="form-control" name="keyword"
+					id="keyword" placeholder="Search member" aria-label="Search">
+				<button class="btn btn-success btn-sm" type="submit">search</button>
+				</div>
+			</form>
+		</div>
+		</div>
+		<br>
+		<div class="container">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>사원이름</th>
+							<th>사원번호</th>
+							<th>직책정보</th>
+							<th>업무시간</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="memberlist : ${memberlist}">
+							<td><a th:text="${memberlist.name}"></a></td>
+							<td><a th:text="${memberlist.employeePublic.number}"></a></td>
+							<td><a th:text="수정"
+								th:href="@{/deputy/manager/update/{id}(id=${memberlist.id})}"></a></td>
+								<td><a th:text="수정" th:href="@{/deputy/manager/work-update/{id}(id=${memberlist.id})}"></a></td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr th:each="search : ${search}">
+							<td><a th:text="${search.name}"></a></td>
+							<td th:text="${search.employeePublic.number}"></td>
+							<td><a th:text="수정"
+								th:href="@{/deputy/manager/update/{id}(id=${search.id})}"></a></td>
+								<td><a th:text="수정"></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<br>
+	
+	<!-- 관리자 해당 직책을 표시 -->
+	<div>
+		<h3 sec:authorize="hasRole('ADMIN')">admin 관리자 사용중</h3>
+		<h3 sec:authorize="hasRole('MANAGER')">manager 관리자 사용중</h3>
+	</div>
+
+	<!-- Optional JavaScript; choose one of the two! -->
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>

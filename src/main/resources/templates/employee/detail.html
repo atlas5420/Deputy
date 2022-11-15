@@ -1,0 +1,70 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/signin.css}" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="text-center">
+	<header th:insert="@{/fragments/commonHead.html}"></header>
+	<br />
+	<div class="container">
+		<div class="table-responsive">
+			<table class="table table-hover w-70">
+				<tr>
+					<td class="h3 mb-3" colspan="2">개인 정보</td>
+				</tr>
+				<tr>
+					<th class="col-5">성명</th>
+					<td class="col-5" th:text="${employee.name}"></td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td th:text="${employee.email}"></td>
+				</tr>
+				<tr>
+					<th>직급</th>
+					<td th:text="${employee.mobile}"></td>
+				</tr>
+				<tr>
+					<th>우편번호</th>
+					<td th:text="${employee.postCode}"></td>
+				</tr>
+				<tr>
+					<th>주소</th>
+					<td th:text="|${employee.address} ${employee.detailAddress} ${employee.extraAddress}|"></td>
+				</tr>
+			</table>
+	
+			<br>
+	
+			<table class="table table-hover w-70">
+				<tr>
+					<td class="h3 mb-3" colspan="2">사원 정보</td>
+				</tr>
+				<tr>
+					<th class="w-50">사원 번호</th>
+					<td class="w-50" th:text="${employee_pub.number}"></td>
+				</tr>
+				<tr>
+					<th>부서</th>
+					<td th:text="${employee_pub.department}"></td>
+				</tr>
+				<tr>
+					<th>직급</th>
+					<td th:text="${employee_pub.position}"></td>
+				</tr>
+			</table>
+			<br>
+			<div>
+				<a type="button" class="btn btn-warning"
+					th:href="@{/deputy/employee/update}">수정</a>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="/js/userajax.js"></script>
+
+</body>
+</html>
